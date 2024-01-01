@@ -28,6 +28,7 @@ const Cocktail = () => {
 	});
 	console.log(filterIngredients);
 	const ingredients = filterIngredients.map((item) => singleDrink[item]);
+	console.log(ingredients);
 	return (
 		<div>
 			<h1>{drink}</h1>
@@ -35,7 +36,15 @@ const Cocktail = () => {
 			<h1>{alcoholic}</h1>
 			<h1>{glass}</h1>
 			<h1>{instructions}</h1>
-			<h1>{ingredients}</h1>
+			<h1>
+				{ingredients.map((item, index) => {
+					return (
+						<div key={item}>
+							{item} {index < ingredients.length - 1 && ","}
+						</div>
+					);
+				})}
+			</h1>
 		</div>
 	);
 };
