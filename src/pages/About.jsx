@@ -5,13 +5,14 @@ const About = () => {
 				About Us
 			</h3>
 			<p className='marginlr mt-6 text-lg md:max-w-[90vw] md:mx-auto'>
-				Introducing "MixMaster," the ultimate party sidekick app that
-				fetches cocktails from the hilarious Cocktails DB API. With a
-				flick of your finger, you'll unlock a treasure trove of
-				enchanting drink recipes that'll make your taste buds dance and
-				your friends jump with joy. Get ready to shake up your mixology
-				game, one fantastical mocktail at a time, and let the laughter
-				and giggles flow!
+				Welcome to our vibrant cocktail haven! we are passionate about
+				bringing the art of mixology to your fingertips. Our mission is
+				to inspire and guide cocktail enthusiasts, both seasoned and
+				aspiring, on a delightful journey through the world of exquisite
+				libations. Whether you're a connoisseur seeking sophisticated
+				recipes or a novice eager to shake up something new, our
+				platform is your go-to source for an extensive collection of
+				cocktail concoctions.
 			</p>
 		</div>
 	);

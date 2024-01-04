@@ -19,8 +19,12 @@ const CocktailList = ({ drinks }) => {
 			id: idDrink,
 		};
 	});
-	return formattedDrinks.map((item) => {
-		return <CocktailCard {...item} key={item.id} />;
-	});
+	return (
+		<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+			{formattedDrinks.map((item) => {
+				return <CocktailCard {...item} key={item.id} />;
+			})}
+		</div>
+	);
 };
 export default CocktailList;

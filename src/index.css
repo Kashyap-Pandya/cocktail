@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 body {
 	font-family: "Poppins", sans-serif;
 }
@@ -33,6 +39,10 @@ nav {
 	}
 	.btn:hover {
 		background-color: #14b8a6;
+	}
+
+	.fontColor h1 {
+		color: #14b8a6;
 	}
 }
 

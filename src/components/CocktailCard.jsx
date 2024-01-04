@@ -2,13 +2,24 @@ import { Link } from "react-router-dom";
 
 const CocktailCard = ({ alcoholic, name, glass, image, id }) => {
 	return (
-		<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
-			<div className='grid grid-col-2 border-red-200 border-2 mt-4'>
-				<h1>{name}</h1>
-				<h2>{glass}</h2>
-				<h2>{alcoholic}</h2>
-				<img src={image} alt='' />
-				<Link to={`/cocktail/${id}`}>Details</Link>
+		<div>
+			<div className='flex flex-col justify-center items-center gap-2 p-8 bg-gray-100 fontColor mt-8 rounded-md'>
+				<h1 className='font-semibold '>
+					<span className='m-1 text-lg sm:text-xl'>{name}</span>
+				</h1>
+				<h2 className=''>
+					<span className='m-1 '>{glass}</span>
+				</h2>{" "}
+				<h2 className='italic'>
+					<span className='m-1 '>{alcoholic}</span>
+				</h2>
+				<img src={image} alt='' className='w-[300px] rounded-md mt-2' />
+				<Link
+					to={`/cocktail/${id}`}
+					className=' bg-teal-300 rounded-md p-2 mt-4 hover:bg-teal-400'
+				>
+					Details
+				</Link>
 			</div>
 		</div>
 	);
