@@ -1,99 +1,34 @@
-// import axios from "axios";
-// import { Link, useLoaderData } from "react-router-dom";
-// export const loader = async ({ params }) => {
-// 	const singleCocktailUrl =
-// 		"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
-// 	const { id } = params;
-// 	const { data } = await axios.get(`${singleCocktailUrl}${id}`);
-// 	return {
-// 		id,
-// 		data,
-// 	};
-// };
-// const Cocktail = () => {
-// 	const { id, data } = useLoaderData();
-
-// 	if (!data) {
-// 		return (
-// 			<div className='text-center  flex flex-col justify-center h-[100vw]'>
-// 				<h3 className=' text-red-400 text-lg sm:text-2xl'>
-// 					ID doesn't match to any drinks.{" "}
-// 				</h3>
-// 				<Link to='/' className='btn w-[200px] mx-auto mt-4'>
-// 					Back To Home{" "}
-// 				</Link>
-// 			</div>
-// 		);
-// 	}
-// 	const singleDrink = data.drinks[0];
-// 	const {
-// 		strDrink: drink,
-// 		strAlcoholic: alcoholic,
-// 		strGlass: glass,
-// 		strInstructions: instructions,
-// 		strCategory: category,
-// 	} = singleDrink;
-
-// 	const string = Object.keys(singleDrink);
-// 	console.log(string);
-// 	const filterIngredients = string.filter((item) => {
-// 		return item.startsWith("strIngredient") && singleDrink[item] !== null;
-// 	});
-// 	console.log(filterIngredients);
-// 	const ingredients = filterIngredients.map((item) => singleDrink[item]);
-// 	console.log(ingredients);
-// 	return (
-// 		<div className='flex flex-col items-center justify-center mx-auto '>
-// 			<h1 className='m-2'>
-// 				Name <span className='p-4'>{drink}</span>
-// 			</h1>
-// 			<h1 className='m-2'>
-// 				Alcoholic <span>{alcoholic}</span>
-// 			</h1>
-// 			<h1 className='m-2'>
-// 				Glass <span>{glass}</span>
-// 			</h1>
-// 			<h1 className='m-2'>
-// 				Category <span>{category}</span>
-// 			</h1>
-
-// 			<h1 className='m-2'>
-// 				{" "}
-// 				Ingredients
-// 				<span className=''>
-// 					{ingredients.map((item, index) => {
-// 						return (
-// 							<div key={item}>
-// 								{item} {index < ingredients.length - 1 && ","}
-// 							</div>
-// 						);
-// 					})}
-// 				</span>
-// 			</h1>
-// 			<h1 className='m-2'>
-// 				Instructions <span>{instructions}</span>
-// 			</h1>
-// 		</div>
-// 	);
-// };
-// export default Cocktail;
-
 import axios from "axios";
 import { Link, useLoaderData } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
-export const loader = async ({ params }) => {
-	const singleCocktailUrl =
-		"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
-	const { id } = params;
-	const { data } = await axios.get(`${singleCocktailUrl}${id}`);
+const singleCocktailUrl =
+	"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+
+export const loader =
+	(queryClient) =>
+	async ({ params }) => {
+		const { id } = params;
+		await queryClient.ensureQueryData(singleCocktailQuery(id));
+		return {
+			id,
+		};
+	};
+
+const singleCocktailQuery = (id) => {
 	return {
-		id,
-		data,
+		queryKey: ["cocktail", id],
+		queryFn: async () => {
+			const { data } = await axios.get(`${singleCocktailUrl}${id}`);
+			return data;
+		},
 	};
 };
 
 const Cocktail = () => {
-	const { id, data } = useLoaderData();
+	const { id } = useLoaderData();
+
+	const { data } = useQuery(singleCocktailQuery(id));
 
 	if (!data) {
 		return (
